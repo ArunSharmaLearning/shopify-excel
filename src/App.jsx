@@ -13,7 +13,6 @@ const App = () => {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [disableDownload, setDisableDownload] = useState(true)
-  const [downloadUrl, setDownloadUrl] = useState('')
   const [filePath, setFilePath] = useState('')
   const maxAllowedSize = 300 * 1024 * 1024;
 
@@ -52,8 +51,6 @@ const App = () => {
         throw new Error('Network response was not ok');
       }
       const data = await response.json(); // Assuming the response is JSON
-      console.log("DATA", data)
-      setDownloadUrl(data.path)
       console.log('File downloaded successfully', data.path);
     } catch (error) {
       console.error('Error downloading file:', error);
@@ -114,7 +111,6 @@ const App = () => {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         const res = JSON.parse(xhr.response);
 
-        console.log("RES", res)
         setFilePath(res.file);
         setDisableDownload(false)
         toast.success('File uploaded successfully!');
@@ -207,8 +203,6 @@ const App = () => {
           <label htmlFor="includePhoneNo">Include Phone Number</label>
         </div>
 
-        {/* Button to handle download */}
-        {console.log("D", filePath)}
         {!disableDownload && <button onClick={handleDownload}>
           Download
         </button>}
