@@ -56,7 +56,7 @@ const App = () => {
       console.error('Error downloading file:', error);
     }
 
-    resetFileInput()
+    // resetFileInput()
   };
 
   const handleDragOver = (e) => {
